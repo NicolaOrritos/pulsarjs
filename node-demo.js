@@ -1,5 +1,5 @@
 
-var pulsar = require("./lib/pulsar.js");
+var pulsar = require("./index.js");
 
 
 function callback()
@@ -12,6 +12,25 @@ function aMoreFrequentCallback()
     console.log("This is a more frequent callback");
 }
 
-pulsar.addPulse(4, callback);
-pulsar.addPulse(1, aMoreFrequentCallback);
+var firstPulse  = pulsar.addPulse(4, callback);
+var secondPulse = pulsar.addPulse(1, aMoreFrequentCallback);
+
+console.log("First pulse: '%s'", firstPulse);
+console.log("Second pulse: '%s'", secondPulse);
+
+setTimeout(function()
+{
+    console.log("Suspending first pulse...");
+    
+    pulsar.suspendPulse(firstPulse);
+    
+}, 5000);
+
+setTimeout(function()
+{
+    console.log("Suspending second pulse...");
+    
+    pulsar.suspendPulse(secondPulse);
+    
+}, 2000);
 
