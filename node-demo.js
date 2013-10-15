@@ -20,9 +20,9 @@ console.log("Second pulse: '%s'", secondPulse);
 
 setTimeout(function()
 {
-    console.log("Suspending first pulse...");
+    console.log("Shutting first pulse down...");
     
-    pulsar.suspendPulse(firstPulse);
+    pulsar.shutPulse(firstPulse);
     
 }, 5000);
 
