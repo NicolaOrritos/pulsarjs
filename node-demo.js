@@ -2,7 +2,7 @@
 var pulsar = require("./index.js");
 
 
-function callback()
+/* function callback()
 {
     console.log("Pulse!");
 }
@@ -16,9 +16,9 @@ var firstPulse  = pulsar.addPulse(4, callback);
 var secondPulse = pulsar.addPulse(1, aMoreFrequentCallback);
 
 console.log("First pulse: '%s'", firstPulse);
-console.log("Second pulse: '%s'", secondPulse);
+console.log("Second pulse: '%s'", secondPulse); */
 
-setTimeout(function()
+/* setTimeout(function()
 {
     console.log("Shutting first pulse down...");
     
@@ -32,5 +32,8 @@ setTimeout(function()
     
     pulsar.suspendPulse(secondPulse);
     
-}, 2000);
+}, 2000); */
+
+
+pulsar.loadPulses();
 
