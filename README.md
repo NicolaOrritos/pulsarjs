@@ -8,7 +8,7 @@ Installation
 ------------
     npm install pulsarjs
 
-Required modules are nedb and node_hash
+Required modules are [nedb](https://github.com/louischatriot/nedb) and [node_hash](https://github.com/Marak/node_hash)
 
 
 Usage
