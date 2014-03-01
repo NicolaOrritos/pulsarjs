@@ -85,8 +85,7 @@ exports.pulsarjs =
                     console.log("Second pulse: '%s'", secondPulseId);
 
                     test.ok(secondPulseId);
-
-
+                    
                     test.done();
                 });
             });
