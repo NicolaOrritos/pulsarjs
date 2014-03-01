@@ -1,6 +1,6 @@
 {
     "name": "pulsarjs",
-    "version": "0.7.6",
+    "version": "0.7.7",
     "main": "lib/pulsar.js",
     "description": "Pulsarjs is a simple function scheduler",
     "homepage": "https://github.com/NicolaOrritos/pulsarjs",

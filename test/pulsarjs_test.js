@@ -87,7 +87,7 @@ exports.pulsarjs =
                     test.ok(secondPulseId);
                     
                     test.done();
-                });
+                }, "overridingID");
             });
         });
         

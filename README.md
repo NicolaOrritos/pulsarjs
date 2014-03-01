@@ -66,8 +66,6 @@ We can use pulsar for this job!
             });
         });
     });
-    
-    
 ```
     
 By using the previous code _"Pulse!"_ will be printed every 4 seconds and _"This is a more frequent callback"_ every one second.
