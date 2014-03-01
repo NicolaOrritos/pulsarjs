@@ -45,7 +45,6 @@ exports.pulsarjs =
     setUp: function(done)
     {
         // setup here
-        pulsar.loadPulses();
         
         done();
     },
@@ -54,25 +53,38 @@ exports.pulsarjs =
         test.expect(2);
         
         
-        function callback()
+        pulsar.loadPulses(function(loaded)
         {
-            console.log("Pulse!");
-        }
+            console.log("Loaded previous pulses: '%s'", JSON.stringify(loaded));
+            
+            function callback()
+            {
+                console.log("Pulse!");
+            }
 
-        function aMoreFrequentCallback()
-        {
-            console.log("This is a more frequent callback");
-        }
+            function aMoreFrequentCallback()
+            {
+                console.log("This is a more frequent callback");
+            }
 
-        var firstPulse  = pulsar.addPulse(4, callback);
-        var secondPulse = pulsar.addPulse(1, aMoreFrequentCallback);
 
-        console.log("First pulse: '%s'", firstPulse);
-        console.log("Second pulse: '%s'", secondPulse);
-        
-        
-        test.ok(firstPulse);
-        test.ok(secondPulse);
+            pulsar.addPulse(4, callback, function(err, firstPulseId)
+            {
+                console.log("First pulse: '%s'", firstPulseId);
+
+                test.ok(firstPulseId);
+
+                pulsar.addPulse(1, aMoreFrequentCallback, function(err, secondPulseId)
+                {
+                    console.log("Second pulse: '%s'", secondPulseId);
+
+                    test.ok(secondPulseId);
+
+
+                    test.done();
+                });
+            });
+        });
         
         
         /* setTimeout(function()
@@ -90,8 +102,5 @@ exports.pulsarjs =
             pulsar.suspendPulse(secondPulse);
 
         }, 2000); */
-        
-        
-        test.done();
     }
 };
