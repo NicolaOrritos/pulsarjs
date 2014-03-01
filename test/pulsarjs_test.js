@@ -33,7 +33,7 @@ exports.pulsarjs =
     },
     'no args': function(test)
     {
-        test.expect(5);
+        test.expect(9);
         
         
         pulsar.loadPulses(function(err, loaded)
@@ -69,7 +69,22 @@ exports.pulsarjs =
 
                     test.ok(secondPulseId);
                     
-                    test.done();
+                    pulsar.isPulseActive(firstPulseId, function(err3, isActive)
+                    {
+                        test.ifError(err3);
+                        
+                        test.ok(isActive);
+                    
+                        pulsar.isPulseActive(secondPulseId, function(err4, isActive2)
+                        {
+                            test.ifError(err4);
+
+                            test.ok(isActive2);
+
+
+                            test.done();
+                        });
+                    });
                     
                 }, "overridingID");
             });
