@@ -3,23 +3,6 @@
 var pulsar = require("../index.js");
 
 
-/* setTimeout(function()
-{
-    console.log("Shutting first pulse down...");
-    
-    pulsar.shutPulse(firstPulse);
-    
-}, 5000);
-
-setTimeout(function()
-{
-    console.log("Suspending second pulse...");
-    
-    pulsar.suspendPulse(secondPulse);
-    
-}, 2000); */
-
-
 /*
   ======== A Handy Little Nodeunit Reference ========
   https://github.com/caolan/nodeunit
@@ -87,6 +70,7 @@ exports.pulsarjs =
                     test.ok(secondPulseId);
                     
                     test.done();
+                    
                 }, "overridingID");
             });
         });
