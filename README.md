@@ -30,13 +30,44 @@ We can use pulsar for this job!
 ```javascript
     var pulsar = require("pulsarjs");
     
-    // The first parameter (here '4') is the frequency in seconds
-    var firstPulse  = pulsar.addPulse(4, callback);
-    var secondPulse = pulsar.addPulse(1, aMoreFrequentCallback);
+    // 1. Trigger previous pulses loading:
+    pulsar.loadPulses(function(err, pulsesIDs)
+    {
+        // 2. Once finished let's print their IDs:
+        console.log("Loaded previous pulses: '%s'", JSON.stringify(pulsesIDs));
+
+        
+        // 3. Now define the actual code of your pulses:
+        function callback()
+        {
+            console.log("Pulse!");
+        }
+
+        function aMoreFrequentCallback()
+        {
+            console.log("This is a more frequent callback");
+        }
+
+
+        // 4. Add the first one
+        //    The first parameter (here '4') is the frequency in seconds
+        pulsar.addPulse(4, callback, function(err1, firstPulseId)
+        {
+            // An ID like '0241abd2d055ec0f34b9e5238831bd5032221d95' will be logged...
+            console.log("First pulse: '%s'", firstPulseId);
+            
+
+            // 5. Add the second one
+            pulsar.addPulse(1, aMoreFrequentCallback, function(err2, secondPulseId)
+            {
+                console.log("Second pulse: '%s'", secondPulseId);
+                
+                // 6. DONE :-)
+            });
+        });
+    });
     
-    // An ID like '0241abd2d055ec0f34b9e5238831bd5032221d95' will be logged
-    console.log("First pulse: '%s'", firstPulse);
-    console.log("Second pulse: '%s'", secondPulse);
+    
 ```
     
 By using the previous code _"Pulse!"_ will be printed every 4 seconds and _"This is a more frequent callback"_ every one second.
