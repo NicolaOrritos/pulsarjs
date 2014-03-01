@@ -10,7 +10,5 @@
   "unused": true,
   "boss": true,
   "eqnull": true,
-  "node": true,
-  "evil": true,
-  "loopfunc": true
+  "node": true
 }
