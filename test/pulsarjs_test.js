@@ -50,11 +50,13 @@ exports.pulsarjs =
     },
     'no args': function(test)
     {
-        test.expect(2);
+        test.expect(5);
         
         
-        pulsar.loadPulses(function(loaded)
+        pulsar.loadPulses(function(err, loaded)
         {
+            test.ifError(err);
+            
             console.log("Loaded previous pulses: '%s'", JSON.stringify(loaded));
             
             function callback()
@@ -68,14 +70,18 @@ exports.pulsarjs =
             }
 
 
-            pulsar.addPulse(4, callback, function(err, firstPulseId)
+            pulsar.addPulse(4, callback, function(err1, firstPulseId)
             {
+                test.ifError(err1);
+                
                 console.log("First pulse: '%s'", firstPulseId);
 
                 test.ok(firstPulseId);
 
-                pulsar.addPulse(1, aMoreFrequentCallback, function(err, secondPulseId)
+                pulsar.addPulse(1, aMoreFrequentCallback, function(err2, secondPulseId)
                 {
+                    test.ifError(err2);
+                    
                     console.log("Second pulse: '%s'", secondPulseId);
 
                     test.ok(secondPulseId);
