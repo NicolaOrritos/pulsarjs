@@ -31,16 +31,16 @@ exports.pulsarjs =
         
         done();
     },
-    'no args': function(test)
+    'Fresh start': function(test)
     {
         test.expect(9);
         
         
-        pulsar.loadPulses(function(err, loaded)
+        pulsar.clearPulses(function(err, removed)
         {
             test.ifError(err);
             
-            console.log("Loaded previous pulses: '%s'", JSON.stringify(loaded));
+            console.log("Cleared previous pulses: '%s'", JSON.stringify(removed));
             
             function callback()
             {
@@ -53,7 +53,7 @@ exports.pulsarjs =
             }
 
 
-            pulsar.addPulse(4, callback, function(err1, firstPulseId)
+            pulsar.addPulse(8, callback, function(err1, firstPulseId)
             {
                 test.ifError(err1);
                 
@@ -61,7 +61,7 @@ exports.pulsarjs =
 
                 test.ok(firstPulseId);
 
-                pulsar.addPulse(1, aMoreFrequentCallback, function(err2, secondPulseId)
+                pulsar.addPulse(4, aMoreFrequentCallback, function(err2, secondPulseId)
                 {
                     test.ifError(err2);
                     
@@ -80,9 +80,10 @@ exports.pulsarjs =
                             test.ifError(err4);
 
                             test.ok(isActive2);
-
-
-                            test.done();
+                            
+                            
+                            // Let's see some pulses triggered:
+                            setTimeout(function() {test.done();}, 10000);
                         });
                     });
                     
